@@ -7,7 +7,6 @@ import { NgControl, AbstractControl, FormControlDirective } from '@angular/forms
 })
 export class ValidateDomainDirective{
   constructor(private ngControl:NgControl){
-    console.log("setting formcontrol", ngControl);
     this.setValidator(<FormControlDirective> ngControl);
   }
 
