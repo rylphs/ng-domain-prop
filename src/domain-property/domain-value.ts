@@ -42,8 +42,8 @@ export abstract class DomainValue<PRIMITIVE_TYPE>{
   }
 
   public getValue(){
-    if(!this.isValid(this.value.toString())) return this.getInvalidValue();
-    return this.value;
+    return this.value === undefined || this.value === null
+      || this.isValid(this.value.toString())? this.getInvalidValue(): this.value;
   }
 
   public valueOf():PRIMITIVE_TYPE {
