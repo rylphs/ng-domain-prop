@@ -1,6 +1,6 @@
 {
   "name": "ng-domain-prop",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Helps the use of domain types in angular projects.",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,7 @@
   },
   "license": "MIT",
   "typings": "./domain-properties.d.ts",
-  "dependencies":{
+  "dependencies": {
     "@angular/core": ">=2.0.0",
     "@angular/forms": ">=2.0.0"
   },
