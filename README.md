@@ -26,9 +26,8 @@ The ng-domain-prop, is an angular library that allows to work with domain specif
 
 It also allows to configure angular forms to use form validation based on DomainTypes:
 ```javascript
-	@ValidateDomainValues
 	@Component({
-		template: `<input [(ngMpodel)]='value' />`
+		template: `<input validate-domain [(ngMpodel)]='value' />`
 	})
 	export class MyComponent{
 		private value:MyDomainType; /*the input will be validated by the domain class.*/
@@ -82,9 +81,9 @@ All the methods have a default implementation and you can override the following
 
 Obs: The other methods are part of the public API or are used by the class itself, so we don't recommend overriding them.
 
-####Example:
+####Example Implementation:
 ```javascript
-import {DomainValue} from 'domain-properties/domain-properties';
+import {DomainValue} from 'ng-domain-prop/ng-domain-prop';
 
 export class CommaNumber extends DomainValue<number>{
 
@@ -109,7 +108,7 @@ export class CommaNumber extends DomainValue<number>{
 Second, the class containing the domaintype should be correctelly decorated:
 
 ```javascript
-	import {UsesDomainProperties, DomainProperty} from 'domain-properties/domain-properties';
+	import {UsesDomainProperties, DomainProperty} from 'ng-domain-prop/ng-domain-prop';
 
 	@UsesDomainValues //Tells the lib to configure domain type attributes
 	Class MyDomainClass {
@@ -121,7 +120,7 @@ Second, the class containing the domaintype should be correctelly decorated:
 
 Finnaly, if you want to use validation the input to be validated must have the 'validate-domain' directive:
 ```javascript
-	import {ValidateDomainValues} from 'domain-properties/domain-properties';
+	import { ValidateDomainDirective } from 'ng-domain-prop/ng-domain-prop';
 
 	@Component({
 		template: `<input validate-domain validate-domain [(ngMpodel)]='myClass.value' />`
