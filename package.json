@@ -23,7 +23,9 @@
   "typings": "./domain-properties.d.ts",
   "dependencies": {
     "@angular/core": ">=2.0.0",
-    "@angular/forms": ">=2.0.0"
+    "@angular/forms": ">=2.0.0",
+    "reflect-metadata": "^0.1.8",
+    "typescript": "~2.0.3"
   },
   "devDependencies": {
     "@angular/core": "~2.1.0",
