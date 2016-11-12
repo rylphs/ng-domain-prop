@@ -1,6 +1,6 @@
 {
   "name": "ng-domain-prop",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Helps the use of domain types in angular projects.",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,10 @@
   "keywords": [
     "domain-values",
     "ddd",
-    "angular2", "ng2", "property", "prop"
+    "angular2",
+    "ng2",
+    "property",
+    "prop"
   ],
   "repository": {
     "type": "git",
