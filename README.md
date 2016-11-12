@@ -101,30 +101,30 @@ All the methods have a default implementation, and you can override the followin
 	* Override it to convert from string value the primitive type.
 	* The default implementation doesn't do any conversion so if
 	* you use other primitive type than string you MUST override it.
- 	* @param {string} value - The string value to be converted.
- 	*/
+	* @param {string} value - The string value to be converted.
+	*/
 	protected stringToPrimitive(value:string):PRIMITIVE_TYPE;
 
 	/**
-  * Returns the apropriate string representation of the value.
+	* Returns the apropriate string representation of the value.
 	* Override it in case you the to convert the primitive value before is shown
 	* @param {value::PRIMITIVE_TYPE} value - The primitive value to be converted.
-  */
+	*/
 	primitiveToString(value::PRIMITIVE_TYPE):string;
 
 	/**
-  * Convert a primitive value before set the value.
+	* Convert a primitive value before set the value.
 	* Override it in case you need to do some conversion on a primitive value.
-  * @param {value::PRIMITIVE_TYPE} value - The primitive value to be converted.
-  */
+	* @param {value::PRIMITIVE_TYPE} value - The primitive value to be converted.
+	*/
 	primitiveToPrimitive(value:PRIMITIVE_TYPE):PRIMITIVE_TYPE
 
 	/**
-  * Determine whether a value is valid or not.
+	* Determine whether a value is valid or not.
 	* Override it if you want the use validation in angular2 forms.
 	* Default implmentation doesn't do any validation at all.
-  * @param {value::string} value - The string value to be validated.
-  */
+	* @param {value::string} value - The string value to be validated.
+	*/
 	isValid(value:string):boolean;
 ```
 
