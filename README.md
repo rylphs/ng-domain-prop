@@ -179,7 +179,7 @@ this.value += 7;
 ```
 This is possible because `CommaNumber` extends the `DomainValue` class that implements `valueOf()` method, wich returns its primitive value (in this case is a `number`). The downside is that if you want to use some `CommaNumber` method in you class typescript will complain. You could also define `value` with the `any` type so you can both use it in primitive operation and use any method, but in this case you'd loose type checking. There is an open issue on typescript github to allow wrapped values to work as primitives ([Issue 2631](https://github.com/Microsoft/TypeScript/issues/2361)), but until now (version 2.0.9) the issue is not implemented yet.
 
-If you want you can also have you domain property instantiated right in the component (since 1.1.6):
+If you want you can also have you domain property instantiated right in the component (since 1.1.1):
 
 ```javascript
 	import { ValidateDomainDirective, UsesDomainValues, DomainProperty } from 'ng-domain-prop/ng-domain-prop';
