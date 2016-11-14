@@ -1,6 +1,6 @@
 {
   "name": "ng-domain-prop",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Helps the use of domain types in angular projects.",
   "main": "index.js",
   "scripts": {
