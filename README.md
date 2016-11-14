@@ -188,7 +188,7 @@ This is possible because `CommaNumber` extends the `DomainValue` class that impl
 	@Component({
 		template: `<input validate-domain validate-domain [(ngMpodel)]='commaNumber' />`
 	})
-	@UsesDomainValues //The decorator must come after the angular component decorator
+	@UsesDomainValues
 	export class MyComponent{
 		@DomainProperty(CommaNumber) commaNumber:any = 5;
 	}
