@@ -1,6 +1,6 @@
 # ng-domain-prop
 
-#### Any suggestion, bug or question please, [open an issue](https://github.com/rylphs/ng-domain-prop/issues/new)!
+Any suggestion, bug or question please, [open an issue](https://github.com/rylphs/ng-domain-prop/issues/new)!
 
 If you like to define you own domain values in your angular 2 application perhaps once at least you wanted to do that:
 
