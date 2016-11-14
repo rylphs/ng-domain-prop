@@ -1,6 +1,6 @@
 # ng-domain-prop
 
-## Any suggestion, bug or question please, [open an issue](https://github.com/rylphs/ng-domain-prop/issues/new)!
+#### Any suggestion, bug or question please, [open an issue](https://github.com/rylphs/ng-domain-prop/issues/new)!
 
 If you like to define you own domain values in your angular 2 application perhaps once at least you wanted to do that:
 
@@ -33,8 +33,7 @@ export class MyComponent{
 	private myClass:MyClass = new MyClass();
 }
 ```
-
-The ng-domain-prop, is an angular library that helps you to use your own domain value types as angular2 models. It allows to work with the domain type much like they were javascript primitive types.
+#### The ng-domain-prop, is an angular library that helps you to use your own domain value types as angular2 models. It allows to work with the domain type much like they were javascript primitive types.
 
 ```javascript
 	Class CommaNumber extends DomainValue<number>{
@@ -77,9 +76,9 @@ It also allows to easily configure angular forms to use your domain value valida
 	}
 ```
 
-##Usage:
+### Usage:
 
-First, the domain specific type must extends the DomainValue class:
+1. First, the domain specific type must extends the DomainValue class:
 ```javascript
 	abstract class DomainValue<PRIMITIVE_TYPE>{
 		protected value:PRIMITIVE_TYPE;
@@ -132,7 +131,7 @@ All the methods have a default implementation, and you can override the followin
 
 Obs: The other methods are part of the public API or are used by the class itself, so overriging them can brake the library.
 
-####Example Implementation:
+1.1. Example Implementation:
 
 ```javascript
 import {DomainValue} from 'ng-domain-prop/ng-domain-prop';
@@ -162,7 +161,7 @@ export class CommaNumber extends DomainValue<number>{
 ```
 
 
-Second, the class containing the domaintype should be correctelly decorated:
+2. Second, the class containing the domaintype should be correctelly decorated:
 
 ```javascript
 	import {UsesDomainProperties, DomainProperty} from 'ng-domain-prop/ng-domain-prop';
@@ -196,7 +195,7 @@ If you want you can also have you domain property instantiated right in the comp
 ```
 
 
-Finnaly, if you want to use validation the input to be validated must have the 'validate-domain' directive:
+3. Finnaly, if you want to use validation the input to be validated must have the 'validate-domain' directive:
 
 ```javascript
 	import { ValidateDomainDirective } from 'ng-domain-prop/ng-domain-prop';
