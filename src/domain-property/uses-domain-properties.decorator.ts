@@ -26,5 +26,5 @@ export function UsesDomainProperties(targetConstructor: any) {
           });
       }
     }
-    return createConstructor(originalConstructor, setDomainValues);
+    return createConstructor(originalConstructor, setDomainValues, true);
 }
