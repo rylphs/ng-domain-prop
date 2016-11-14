@@ -27,7 +27,7 @@ Or, perhaps you wanted to use that attribute in a form and have the your class c
 ```javascript
 /*The model will receave the user input value as a string value, not as a MyNumberWrapper object*/
 @Component({
-	template: `<input [(ngMpodel)]='myClass.attr' />`
+	template: `<input [(ngMpodel)]='myClass.attr' />` //Does not work as expected
 })
 export class MyComponent{
 	private myClass:MyClass = new MyClass();
@@ -131,7 +131,7 @@ All the methods have a default implementation, and you can override the followin
 
 Obs: The other methods are part of the public API or are used by the class itself, so overriging them can brake the library.
 
-1.1. Example Implementation:
+#### Example Implementation:
 
 ```javascript
 import {DomainValue} from 'ng-domain-prop/ng-domain-prop';
@@ -180,7 +180,7 @@ this.value += 7;
 ```
 This is possible because `CommaNumber` extends the `DomainValue` class that implements `valueOf()` method, wich returns its primitive value (in this case is a `number`). The downside is that if you want to use some `CommaNumber` method in you class typescript will complain. You could also define `value` with the `any` type so you can both use it in primitive operation and use any method, but in this case you'd loose type checking. There is an open issue on typescript github to allow wrapped values to work as primitives ([Issue 2631](https://github.com/Microsoft/TypeScript/issues/2361)), but until now (version 2.0.9) the issue is not implemented yet.
 
-If you want you can also have you domain property instantiated right in the component (since 1.1.1):
+2.1. If you want you can also have you domain property instantiated right in the component (since 1.1.1):
 
 ```javascript
 	import { ValidateDomainDirective, UsesDomainValues, DomainProperty } from 'ng-domain-prop/ng-domain-prop';
