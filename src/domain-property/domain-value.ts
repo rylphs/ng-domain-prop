@@ -62,9 +62,12 @@ export abstract class DomainValue<PRIMITIVE_TYPE>{
 
   public toString(){
     let value:any = this.value;
-    if(value === undefined || value === null || value === '')
+    if(value === undefined || value === null)
       return this.getNullValue();
+    if(value === '') return this.isValid('') ? this.getNullValue() : this.getInvalidValue();
+
     value = this.primitiveToString(value);
-    return !this.isValid(value)? this.getInvalidValue() : value;
+    if(!this.isValid(value)) return this.getInvalidValue();
+    return value;
   }
 }
