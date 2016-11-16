@@ -25,9 +25,11 @@ myClass.attr = new MyNumberWrapper(myClass.attr.getValue() + 5);
 Or, perhaps you wanted to use that attribute in a form and have the your class correctelly instantiated:
 
 ```javascript
-/*The model will receave the user input value as a string value, not as a MyNumberWrapper object*/
+/*The model will receave the user input value as a string value,
+not as a MyNumberWrapper object*/
 @Component({
-	template: `<input [(ngMpodel)]='myClass.attr' />` //Does not work as expected
+	//Does not work as expected
+	template: `<input [(ngMpodel)]='myClass.attr' />`
 })
 export class MyComponent{
 	private myClass:MyClass = new MyClass();
@@ -42,7 +44,8 @@ export class MyComponent{
 
 	@UsesDomainValues
 	Class MyDomainClass {
-	/*CommaNumber type behave much like a number although is really a CommaNumber object.*/
+	/*CommaNumber type behave much like a number although it is
+	really a CommaNumber object.*/
 	@DomainProperty(CommaNumber) value:any = 5;
 
 		addSomeValue(ammount:number){
@@ -50,12 +53,14 @@ export class MyComponent{
 			this.value = '3,6';
 			// You can set it from the primitive type. */
 			this.value = 3.6;
-			/* Its even possible to do math with the property (if the primitive type is a number ofcourse ;) ).*/
+			/* Its even possible to do math with the property
+			(if the primitive type is a number ofcourse ;) ).*/
 			this.value += number;  
 		}
 	}
 
-	/*input from user will be converted and instantiated as a CommaNumber object*/
+	/*input from user will be converted and instantiated
+	as a CommaNumber object*/
 	@Component({
 		template: `<input [(ngMpodel)]='myclass.value' />`
 	})
@@ -80,73 +85,83 @@ It also allows to easily configure angular forms to use your domain value valida
 
 1. First, the domain specific type must extends the DomainValue class:
 ```javascript
-	abstract class DomainValue<PRIMITIVE_TYPE>{
-		protected value:PRIMITIVE_TYPE;
-		constructor(value:PRIMITIVE_TYPE));
-		public equals(value:any):boolean;
-		public setValue(value:any);
-		public getValue();
-		public valueOf():PRIMITIVE_TYPE;
-		public isValid(value:string):boolean;
-		protected primitiveTomPrimitive(value:PRIMITIVE_TYPE):PRIMITIVE_TYPE;
-		protected abstract stringToPrimitive(value:string):PRIMITIVE_TYPE;
-		primitiveToString():string;
-	}
+abstract class DomainValue<PRIMITIVE_TYPE>{
+	protected value:PRIMITIVE_TYPE;
+	constructor(value:PRIMITIVE_TYPE));
+	public equals(value:any):boolean;
+	public setValue(value:any);
+	public getValue();
+	public valueOf():PRIMITIVE_TYPE;
+	public isValid(value:string):boolean;
+	protected primitiveTomPrimitive(value:PRIMITIVE_TYPE):PRIMITIVE_TYPE;
+	protected abstract stringToPrimitive(value:string):PRIMITIVE_TYPE;
+	primitiveToString():string;
+}
 ```
 
 All the methods have a default implementation, and you can override the following methods:
 
 ```javascript
-	/**
-	* Gets the string value and convert to the apropriate primitive value.
-	* Override it to convert from string value the primitive type.
-	* The default implementation doesn't do any conversion so if
-	* you use other primitive type than string you MUST override it.
-	* @param {string} value - The string value to be converted.
-	*/
-	protected stringToPrimitive(value:string):PRIMITIVE_TYPE;
+/**
+* Gets the string value and convert to the apropriate primitive value.
+* Override it to convert from string value the primitive type.
+* The default implementation doesn't do any conversion so if
+* you use other primitive type than string you MUST override it.
+* @param {string} value - The string value to be converted.
+*/
+protected stringToPrimitive(value:string):PRIMITIVE_TYPE;
 
-	/**
-	* Returns the apropriate string representation of the value.
-	* Override it in case you the to convert the primitive value before is shown
-	* @param {value::PRIMITIVE_TYPE} value - The primitive value to be converted.
-	*/
-	primitiveToString(value::PRIMITIVE_TYPE):string;
+/**
+* Returns the apropriate string representation of the value.
+* Override it in case you want to convert the primitive value
+* before is shown
+* @param {value::PRIMITIVE_TYPE} value - The primitive value
+* to be converted.
+*/
+primitiveToString(value::PRIMITIVE_TYPE):string;
 
-	/**
-	* Convert a primitive value before set the value.
-	* Override it in case you need to do some conversion on a primitive value.
-	* @param {value::PRIMITIVE_TYPE} value - The primitive value to be converted.
-	*/
-	primitiveToPrimitive(value:PRIMITIVE_TYPE):PRIMITIVE_TYPE
+/**
+* Convert a primitive value before set the value.
+* Override it in case you need to do some conversion on
+* a primitive value.
+* @param {value::PRIMITIVE_TYPE} value - The primitive value
+* to be converted.
+*/
+primitiveToPrimitive(value:PRIMITIVE_TYPE):PRIMITIVE_TYPE
 
-	/**
-	* Determine whether a string input is valid or not.
-	* Override it if you want the use validation in angular2 forms.
-	* This method is also used by the lib to determine either the value will be
-	* converted from string or not. Invalid values will be stored without any conversion.
-	* In case of an invalid value the method toString() will return getInvalidValue()
-	* instead of the value itself.
-	* Default implmentation doesn't do any validation at all.
-	* @param {value::string} value - The string value to be validated.
-	*/
-	isValid(value:string):boolean;
+/**
+* Determine whether a string input is valid or not.
+* Override it if you want the use validation in angular2 forms.
+* This method is also used by the lib to determine either the value
+* will be converted from string or not. Invalid values will be
+* stored without any conversion.
+* In case of an invalid value the method toString() will return
+* getInvalidValue() instead of the value itself.
+* Default implmentation doesn't do any validation at all.
+* @param {value::string} value - The string value to be validated.
+*/
+isValid(value:string):boolean;
 
-	/**
-	* Get a string representation null values (null, undefined or empty string).
-	* This method is called by toString() when this.value is null, undefined or ''.
-	* Override it if you want to change how null values are shown to the user.
-	* Default implmentation returns an empty string.
-	*/
-	protected getNullValue():string
+/**
+* Get a string representation null values (null, undefined
+* or empty string).
+* This method is called by toString() when this.value is null,
+* undefined or ''.
+* Override it if you want to change how null values are shown
+* to the user.
+* Default implmentation returns an empty string.
+*/
+protected getNullValue():string
 
-	/**
-	* Get a string representation of an invalid value.
-	* This method is called by toString() whenever isValid() returns false.
-	* Override it if you want to change how invalid values are shown to the user.
-	* Default implmentation returns the invalid value (this.value).
-	*/
-	protected getInvalidValue():string
+/**
+* Get a string representation of an invalid value.
+* This method is called by toString() whenever isValid()
+* returns false.
+* Override it if you want to change how invalid values are
+* shown to the user.
+* Default implmentation returns the invalid value (this.value).
+*/
+protected getInvalidValue():string
 ```
 
 Obs: The other methods are part of the public API or are used by the class itself, so overriging them can brake the library.
@@ -158,7 +173,8 @@ import {DomainValue} from 'ng-domain-prop/ng-domain-prop';
 
 export class CommaNumber extends DomainValue<number>{
 
-  /*You can use primitiveToPrimitive to do some conversion. E.g: Decimal digit truncation*/
+  /*You can use primitiveToPrimitive to do some conversion.
+	E.g: Decimal digit truncation*/
 	primitiveToPrimitive(value:number)number {
 		return Math.floor(value*100)/100;
 	}
@@ -168,7 +184,8 @@ export class CommaNumber extends DomainValue<number>{
     return parseFloat(value.replace(/,/, '.'));
   }
 
-  /*Converts from number in the format 00.00 to a string in the format '00,00'*/
+  /*Converts from number in the format 00.00 to a string
+	in the format '00,00'*/
   public primitiveToString(value:number):string {
      return ("" + value).replace(/\./, ',');
   }
@@ -184,7 +201,8 @@ export class CommaNumber extends DomainValue<number>{
 2. Second, the class containing the domaintype should be correctelly decorated:
 
 ```javascript
-	import {UsesDomainProperties, DomainProperty} from 'ng-domain-prop/ng-domain-prop';
+	import {UsesDomainProperties, DomainProperty}
+		from 'ng-domain-prop/ng-domain-prop';
 
 	@UsesDomainValues //Tells the lib to configure domain type attributes
 	Class MyDomainClass {
@@ -216,7 +234,8 @@ This is possible because `CommaNumber` extends the `DomainValue` class that impl
 2.1. If you want you can also have you domain property instantiated right in the component (since 1.1.1):
 
 ```javascript
-	import { ValidateDomainDirective, UsesDomainValues, DomainProperty } from 'ng-domain-prop/ng-domain-prop';
+	import { ValidateDomainDirective, UsesDomainValues, DomainProperty }
+	from 'ng-domain-prop/ng-domain-prop';
 
 	@Component({
 		template: `<input validate-domain validate-domain [(ngMpodel)]='commaNumber' />`
