@@ -173,6 +173,19 @@ export class CommaNumber extends DomainValue<number>{
 	}
 ```
 `@UsesDomainValues` works setting attributes decorated with `@DomainProperty` as a property accessor that returns a `DomainValue` object (`CommaNumber` in this case) and that accept setting its value from its primitive type, string or event from another `DomainValue` (`CommaNumber`) object.
+
+### v1.2.0 Update:
+**After version 1.2.0 you don't need the `@UsesDomainValues` decorator anymore, and its use has been deprecated:**
+
+```javascript
+	import { DomainProperty } from 'ng-domain-prop/ng-domain-prop';
+	//@UsesDomainValues not needed anymore
+	Class MyDomainClass {
+		/*Defines that the attribute should be treated as a domain type*/
+		@DomainProperty(CommaNumber) value:number = 5;
+	}
+```
+
 Notice that although `value` is a `CommaNumber` object I used the `number` type for it. I did it to trick typescript so I can do some math on it. E.g:
 
 ```javascript
