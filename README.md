@@ -238,7 +238,8 @@ This is possible because `CommaNumber` extends the `DomainValue` class that impl
 	from 'ng-domain-prop/ng-domain-prop';
 
 	@Component({
-		template: `<input validate-domain validate-domain [(ngMpodel)]='commaNumber' />`
+		template: `<input validate-domain validate-domain
+								[(ngMpodel)]='commaNumber' />`
 	})
 	@UsesDomainValues
 	export class MyComponent{
@@ -250,13 +251,16 @@ This is possible because `CommaNumber` extends the `DomainValue` class that impl
 3. Finnaly, if you want to use validation the input to be validated must have the 'validate-domain' directive:
 
 ```javascript
-	import { ValidateDomainDirective } from 'ng-domain-prop/ng-domain-prop';
+	import { ValidateDomainDirective }
+		from 'ng-domain-prop/ng-domain-prop';
 
+	//myClass.value will be validated by the domain class.
 	@Component({
-		template: `<input validate-domain validate-domain [(ngMpodel)]='myClass.value' />`
+		template: `<input validate-domain validate-domain
+								[(ngMpodel)]='myClass.value' />`
 	})
 	export class MyComponent{
-		private myClass:MyDomainClass; //the input will be validated by the domain class.
+		private myClass:MyDomainClass;
 	}
 ```
 
