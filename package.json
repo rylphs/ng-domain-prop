@@ -1,6 +1,6 @@
 {
   "name": "ng-domain-prop",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Easy and better integration between your domain classes and angular2 forms",
   "main": "index.js",
   "scripts": {
