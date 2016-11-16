@@ -14,6 +14,7 @@ export class ValidateDomainDirective{
     formControl.control.setValidators([
       function(fc:AbstractControl):{[key: string]: any}{
           let domainValue:DomainValue<any> = formControl.model;
+          if(domainValue === null) return null;
           if(!domainValue.isValid(formControl.value)){
             return {invalidDomainValue :true};
           }
