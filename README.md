@@ -121,12 +121,32 @@ All the methods have a default implementation, and you can override the followin
 	primitiveToPrimitive(value:PRIMITIVE_TYPE):PRIMITIVE_TYPE
 
 	/**
-	* Determine whether a value is valid or not.
+	* Determine whether a string input is valid or not.
 	* Override it if you want the use validation in angular2 forms.
+	* This method is also used by the lib to determine either the value will be
+	* converted from string or not. Invalid values will be stored without any conversion.
+	* In case of an invalid value the method toString() will return getInvalidValue()
+	* instead of the value itself.
 	* Default implmentation doesn't do any validation at all.
 	* @param {value::string} value - The string value to be validated.
 	*/
 	isValid(value:string):boolean;
+
+	/**
+	* Get a string representation null values (null, undefined or empty string).
+	* This method is called by toString() when this.value is null, undefined or ''.
+	* Override it if you want to change how null values are shown to the user.
+	* Default implmentation returns an empty string.
+	*/
+	protected getNullValue():string
+
+	/**
+	* Get a string representation of an invalid value.
+	* This method is called by toString() whenever isValid() returns false.
+	* Override it if you want to change how invalid values are shown to the user.
+	* Default implmentation returns the invalid value (this.value).
+	*/
+	protected getInvalidValue():string
 ```
 
 Obs: The other methods are part of the public API or are used by the class itself, so overriging them can brake the library.

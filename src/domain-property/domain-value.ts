@@ -1,15 +1,16 @@
 export abstract class DomainValue<PRIMITIVE_TYPE>{
-  protected value:PRIMITIVE_TYPE;
+  protected value:PRIMITIVE_TYPE = null;
 
   constructor(value:PRIMITIVE_TYPE){
     this.setValue(value);
   }
 
-  private getPrimitiveFrom(value:any):PRIMITIVE_TYPE {
+  private getPrimitiveFrom(value:any):any {
     if(value instanceof DomainValue){
       return value.getValue();
     }
     else if(typeof value === 'string') {
+      if(!this.isValid(value)) return value;
       return this.primitiveToPrimitive(this.stringToPrimitive(value));
     }
     else {
@@ -17,8 +18,12 @@ export abstract class DomainValue<PRIMITIVE_TYPE>{
     }
   }
 
-  protected getInvalidValue(){
-    return this.value;
+  protected getInvalidValue():string{
+    return this.value.toString();
+  }
+
+  protected getNullValue():string{
+    return '';
   }
 
   protected primitiveToPrimitive(value:PRIMITIVE_TYPE):PRIMITIVE_TYPE{
@@ -34,16 +39,17 @@ export abstract class DomainValue<PRIMITIVE_TYPE>{
   }
 
   public equals(value:any):boolean{
+    if(value === null || value === undefined) return this.value === value;
     return this.value === this.getPrimitiveFrom(value);
   }
 
   public setValue(value:any){
-    this.value = this.getPrimitiveFrom(value);
+    this.value = value === null || value === undefined || value === ''?
+      value : this.getPrimitiveFrom(value);
   }
 
   public getValue(){
-    return this.value === undefined || this.value === null
-      || this.isValid(this.value.toString())? this.getInvalidValue(): this.value;
+    return this.value;
   }
 
   public valueOf():PRIMITIVE_TYPE {
@@ -55,6 +61,10 @@ export abstract class DomainValue<PRIMITIVE_TYPE>{
   }
 
   public toString(){
-    return this.primitiveToString(this.value);
+    let value:any = this.value;
+    if(value === undefined || value === null || value === '')
+      return this.getNullValue();
+    value = this.primitiveToString(value);
+    return !this.isValid(value)? this.getInvalidValue() : value;
   }
 }
