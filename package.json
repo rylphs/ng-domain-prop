@@ -13,7 +13,8 @@
     "angular2",
     "ng2",
     "property",
-    "prop"
+    "prop",
+    "descriptor",
   ],
   "repository": {
     "type": "git",
